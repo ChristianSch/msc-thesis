@@ -117,35 +117,14 @@ def load_data():
     return data
 
 
-def k_fold_cv(clf, X, y, k=3, shuffle=True):
-    """
-    Runs k-fold cross validation on the data given the classifier and parameters.
-    Returns a list of predictions with length k, where each item consists of the
-    predictions for the i-th fold with $i=1...k$.
-    """
-    kf = StratifiedKFold(n_splits=k, random_state=random_state, shuffle=shuffle)
-    preds = []
-
-    for train_index, test_index in kf.split(X, y):
-
-        # assuming classifier object exists
-        X_train = X[train_index,:]
-        y_train = y[train_index,:]
-
-        X_test = X[test_index,:]
-        y_test = y[test_index,:]
-
-        # learn the classifier
-        clf.fit(X_train, y_train)
-
-        # predict labels for test data
-        predictions = clf.predict(X_test)
-        preds.append(predictions)
-
-    return preds
-
 if __name__ == '__main__':
     data = load_data()
 
     for k in data:
-        print(k, ":", data[k][1].shape)
+        X, y = data[k]
+
+        if y.shape[0] >= 10000:
+            # train test split of 2/3
+            pass
+        else:
+            # three fold cross validation
