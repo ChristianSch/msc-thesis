@@ -109,8 +109,6 @@ def load_data():
     }
 
     for k in data:
-        print(k)
-        print(data[k])
         if data[k][1].shape[1] > 10:
             data[k] = (data[k][0], sample_down_label_space(data[k][1], 10))
 
@@ -128,3 +126,4 @@ if __name__ == '__main__':
             pass
         else:
             # three fold cross validation
+            pass
