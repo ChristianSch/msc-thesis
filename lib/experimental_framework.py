@@ -82,48 +82,39 @@ def load_from_arff(filename, labelcount, endian="big",
         return X, y
 
 
-def load_data():
-    data = {
+def load_data(name):
+    if name == 'scene':
         # src: MULAN
-        'scene': load_from_arff('data/scene/scene.arff',
-                                labelcount=6, endian="little"),
-        'emotions': load_from_arff('data/emotions/emotions.arff',
-                                   labelcount=6, endian="little"),
-        'yeast-10': load_from_arff('data/yeast/yeast.arff',
-                                   labelcount=14, endian="little"),
-        'mediamill-10': load_from_arff('data/mediamill/mediamill.arff',
-                                       labelcount=101, endian="little"),
-        'enron-10': load_from_arff('data/enron/enron.arff',
-                                   labelcount=53, endian="little"),
-        'medical-10': load_from_arff('data/medical/medical.arff',
-                                     labelcount=44, endian="little"),
-        'slashdot-10': load_from_arff('data/slashdot/SLASHDOT-F.arff',
-                                      labelcount=22),
-        'ohsumed-10': load_from_arff('data/ohsumed/OHSUMED-F.arff',
+        return load_from_arff('../data/scene/scene.arff',
+                                labelcount=6, endian="little")
+    elif name == 'emotions':
+        return load_from_arff('../data/emotions/emotions.arff',
+                                   labelcount=6, endian="little")
+    elif name == 'yeast-10':
+        return load_from_arff('../data/yeast/yeast.arff',
+                                   labelcount=14, endian="little")
+    elif name == 'mediamill-10':
+        return load_from_arff('../data/mediamill/mediamill.arff',
+                                       labelcount=101, endian="little")
+    elif name == 'enron-10':
+        return load_from_arff('../data/enron/enron.arff',
+                                   labelcount=53, endian="little")
+    elif name == 'medical-10':
+        return load_from_arff('../data/medical/medical.arff',
+                                     labelcount=44, endian="little")
+    elif name == 'slashdot-10':
+        return load_from_arff('../data/slashdot/SLASHDOT-F.arff',
+                                      labelcount=22)
+    elif name == 'ohsumed-10':
+        return load_from_arff('../data/ohsumed/OHSUMED-F.arff',
                                      labelcount=23),
-        'tmc2007-500-10': load_from_arff('data/tmc2007-500/tmc2007-500.arff',
-                                         labelcount=22, endian="little"),
-        # head data/imdb/IMDB-F.arff  -n 40 | grep "{0,1}" | uniq | wc -l
-        'imdb-10': load_from_arff('data/imdb/IMDB-F.arff',
+    elif name == 'tmc2007-500-10':
+        return load_from_arff('../data/tmc2007-500/tmc2007-500.arff',
+                                         labelcount=22, endian="little")
+    elif name == 'imdb-10':
+        # head ../data/imdb/IMDB-F.arff  -n 40 | grep "{0,1}" | uniq | wc -l
+        return load_from_arff('../data/imdb/IMDB-F.arff',
                                   labelcount=28)
-    }
+    else:
+        raise ValueError("No such ../data set: {}".format(name))
 
-    for k in data:
-        if data[k][1].shape[1] > 10:
-            data[k] = (data[k][0], sample_down_label_space(data[k][1], 10))
-
-    return data
-
-
-if __name__ == '__main__':
-    data = load_data()
-
-    for k in data:
-        X, y = data[k]
-
-        if y.shape[0] >= 10000:
-            # train test split of 2/3
-            pass
-        else:
-            # three fold cross validation
-            pass
