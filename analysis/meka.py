@@ -28,8 +28,8 @@ except Exception as e:
 
 
 
-predictions = meka.predict_proba(X_test)
+predictions = meka.predict(X_test)
 
-# hamming_loss(y_test, predictions)
+hamming_loss(y_test, predictions)
 
 print(predictions)
