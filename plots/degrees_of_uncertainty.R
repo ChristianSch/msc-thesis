@@ -1,6 +1,7 @@
 # plotting example distributions of degrees of uncertainty
 # using artificial data
 library("ggplot2")
+library("latex2exp")
 
 setwd("/home/loki/Nextcloud/Uni/MSc Thesis/latex/images/")
 
@@ -18,10 +19,13 @@ df.ex3 <- data.frame(x=x, y=y3)
 g1 <- ggplot(data = df.ex1) +
   geom_line(aes(x=x, y=y)) + xlab("") + ylab("") +
   theme_minimal() +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank()) +
+  theme(axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+  xlab(TeX("P(y_i|x)")) +
+  ylab("Density") +
+  theme(panel.border=element_blank()) +
+  theme(axis.line.x=element_line(color="black", size = .5),
+        axis.line.y=element_line(color="black", size = .5)) +
   scale_x_continuous(breaks=c(0,1))
 ggsave("uncertain_1.png", width=5, height=4, units="cm")
 
@@ -29,10 +33,13 @@ g2 <- ggplot(data = df.ex2) +
   geom_line(aes(x=x, y=y)) + xlab("") + ylab("") +
   geom_vline(xintercept = c(.1, .9), linetype="dotted") +
   theme_minimal() +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank()) +
+  theme(axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+  xlab(TeX("P(y_i|x)")) +
+  ylab("Density") +
+  theme(panel.border=element_blank()) +
+  theme(axis.line.x=element_line(color="black", size = .5),
+        axis.line.y=element_line(color="black", size = .5)) +
   scale_x_continuous(breaks=c(0,1))
 ggsave("uncertain_2.png", width=5, height=4, units="cm")
   
@@ -40,9 +47,12 @@ g3 <- ggplot(data = df.ex3) +
  geom_line(aes(x=x, y=y)) + xlab("") + ylab("") +
   geom_vline(xintercept = c(.5), linetype="dotted") +
   theme_minimal() +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank()) +
+  theme(axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+  xlab(TeX("P(y_i|x)")) +
+  ylab("Density") +
+  theme(panel.border=element_blank()) +
+  theme(axis.line.x=element_line(color="black", size = .5),
+        axis.line.y=element_line(color="black", size = .5)) +
   scale_x_continuous(breaks=c(0,1))
 ggsave("uncertain_3.png", width=5, height=4, units="cm")
